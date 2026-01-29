@@ -1,0 +1,27 @@
+version: '3.8'
+
+services:
+  db:
+    image: postgres:15
+    container_name: pismo-db
+    environment:
+      POSTGRES_USER: pismo_user
+      POSTGRES_PASSWORD: pismo_password
+      POSTGRES_DB: pismo_transactions
+    ports:
+      - "5432:5432"
+
+  app:
+    build: .
+    container_name: pismo-app
+    ports:
+      - "8080:8080"
+    depends_on:
+      - db
+    environment:
+      - SPRING_DATASOURCE_URL=jdbc:postgresql://db:5432/pismo_transactions
+      - SPRING_DATASOURCE_USERNAME=pismo_user
+      - SPRING_DATASOURCE_PASSWORD=pismo_password
+      - SPRING_FLYWAY_URL=jdbc:postgresql://db:5432/pismo_transactions
+      - SPRING_FLYWAY_USER=pismo_user
+      - SPRING_FLYWAY_PASSWORD=pismo_password
