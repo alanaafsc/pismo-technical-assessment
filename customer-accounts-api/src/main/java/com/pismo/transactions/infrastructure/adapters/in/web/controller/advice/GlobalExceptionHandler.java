@@ -1,7 +1,7 @@
 package com.pismo.transactions.infrastructure.adapters.in.web.controller.advice;
 
 import com.pismo.transactions.domain.exceptions.AccountAlreadyExistsException;
-import com.pismo.transactions.infrastructure.adapters.in.web.dto.ErrorResponse;
+import com.pismo.transactions.infrastructure.adapters.in.web.dto.ErrorResponseDTO;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.ExceptionHandler;
@@ -15,7 +15,7 @@ public class GlobalExceptionHandler {
     @ExceptionHandler(AccountNotFoundException.class)
     public ResponseEntity<ErrorResponseDTO> handleAccountNotFound(AccountNotFoundException ex) {
         return ResponseEntity.status(HttpStatus.NOT_FOUND)
-                .body(new ErrorResponse(ex.getMessage()));
+                .body(new ErrorResponseDTO(ex.getMessage()));
     }
 
     @ExceptionHandler(AccountAlreadyExistsException.class)
