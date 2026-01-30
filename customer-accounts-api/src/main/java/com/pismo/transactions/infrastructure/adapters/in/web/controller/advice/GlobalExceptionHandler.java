@@ -32,7 +32,6 @@ public class GlobalExceptionHandler {
 
     @ExceptionHandler(DataIntegrityViolationException.class)
     public ResponseEntity<ErrorResponseDTO> handleDatabaseIntegrity(DataIntegrityViolationException ex) {
-        // Transforma erros de banco (FK, Unique Constraint) em 400 amigáveis
         return ResponseEntity.status(HttpStatus.BAD_REQUEST)
                 .body(new ErrorResponseDTO("Database integrity violation: check if account or operation type exists."));
     }
