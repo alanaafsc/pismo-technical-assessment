@@ -1,4 +1,4 @@
-package com.pismo.transactions.infrastructure.adapters.configuration;
+package com.pismo.transactions.infrastructure.configuration;
 
 import com.pismo.transactions.application.usecase.CreateAccountUseCase;
 import com.pismo.transactions.application.usecase.ProcessTransactionUseCase;
