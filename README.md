@@ -157,16 +157,17 @@ The API processes the `amount` field based on the operation type:
 
 ## 🧪 Testing
 
-## 🧪 Testing Strategy
+## 🔬 Testing Strategy
 
-The project implements a multi-layered testing strategy following the **Testing Pyramid** principles, ensuring reliability from core business rules to infrastructure integration.
+The project employs a robust testing pyramid to ensure reliability across all layers of the Hexagonal Architecture, achieving high code coverage:
 
-### 🔬 Testing Layers
-* **Unit Tests:** Validates core domain logic (e.g., transaction signal inversion rules) in total isolation. These tests do not load the Spring context, ensuring sub-second execution.
-* **Integration Tests (IT):** Employs **Testcontainers** to spin up a real **PostgreSQL 15** instance. 
-    * Utilizes the new Spring Boot 4 `@ServiceConnection` for seamless, zero-config database integration.
-    * Validates JPA mappings, explicit `@Column` naming conventions, and Flyway migrations against a production-grade database.
-* **API Slice Tests:** Uses `@WebMvcTest` and `MockMvc` to validate HTTP contracts, JSON serialization/deserialization, and Global Error Handling using the new `@MockitoBean` override system.
+* **Unit Tests:** Focus on core domain logic, such as transaction amount signal inversion rules based on the `OperationType`. These tests run in total isolation without loading the Spring context, ensuring sub-second execution.
+* **Integration Tests (IT):** Employs **Testcontainers** to spin up a real **PostgreSQL 15-alpine** instance for the persistence layer.
+    * Utilizes the Spring Boot 4 `@ServiceConnection` for seamless, zero-config database integration.
+    * Validates JPA mappings, database constraints, and repository behavior against a production-grade database.
+    * Bypasses Flyway in the test slice using `spring.jpa.hibernate.ddl-auto=create-drop` to ensure a clean and fast environment for adapter validation.
+* **API Slice Tests:** Uses `@WebMvcTest` and `MockMvc` to validate HTTP contracts, Jackson serialization/deserialization, and the **Global REST Advice**.
+    * Leverages the Spring Boot 4 `@MockitoBean` system to isolate controllers from application use cases while ensuring high coverage of the **GlobalExceptionHandler**.
 
 ### 🚀 Running the Suite
 To execute all tests (Unit + Integration):
