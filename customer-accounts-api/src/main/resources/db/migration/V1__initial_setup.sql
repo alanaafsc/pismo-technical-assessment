@@ -1,16 +1,16 @@
--- Criação da tabela de Contas
+-- Creation of the Accounts table
 CREATE TABLE Accounts (
     Account_ID SERIAL PRIMARY KEY,
     Document_Number VARCHAR(20) UNIQUE NOT NULL
 );
 
--- Criação da tabela de Tipos de Operação
+-- Creation of the Operation Types table
 CREATE TABLE Operation_Types (
     OperationType_ID SERIAL PRIMARY KEY,
     Description VARCHAR(50) NOT NULL
 );
 
--- Criação da tabela de Transações
+-- Creation of the Transactions table
 CREATE TABLE Transactions (
     Transaction_ID SERIAL PRIMARY KEY,
     Account_ID INTEGER NOT NULL REFERENCES Accounts(Account_ID),
@@ -19,7 +19,7 @@ CREATE TABLE Transactions (
     EventDate TIMESTAMP NOT NULL DEFAULT CURRENT_TIMESTAMP
 );
 
--- Carga inicial de Tipos de Operação
+-- Initial load of Operation Types
 INSERT INTO Operation_Types (OperationType_ID, Description) VALUES (1, 'PURCHASE');
 INSERT INTO Operation_Types (OperationType_ID, Description) VALUES (2, 'INSTALLMENT PURCHASE');
 INSERT INTO Operation_Types (OperationType_ID, Description) VALUES (3, 'WITHDRAWAL');
