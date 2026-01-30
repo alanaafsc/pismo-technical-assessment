@@ -4,24 +4,40 @@ services:
   db:
     image: postgres:15
     container_name: pismo-db
+    restart: always
     environment:
-      POSTGRES_USER: pismo_user
-      POSTGRES_PASSWORD: pismo_password
-      POSTGRES_DB: pismo_transactions
+      POSTGRES_USER: ${DB_USERNAME}
+      POSTGRES_PASSWORD: ${DB_PASSWORD}
+      POSTGRES_DB: ${DB_NAME}
     ports:
       - "5432:5432"
+    healthcheck:
+      test: ["CMD-SHELL", "pg_isready -U ${DB_USERNAME} -d ${DB_NAME}"]
+      interval: 5s
+      timeout: 5s
+      retries: 5
+    networks:
+      - pismo-network
 
   app:
     build: .
     container_name: pismo-app
+    restart: on-failure
     ports:
       - "8080:8080"
     depends_on:
-      - db
+      db:
+        condition: service_healthy
     environment:
-      - SPRING_DATASOURCE_URL=jdbc:postgresql://db:5432/pismo_transactions
-      - SPRING_DATASOURCE_USERNAME=pismo_user
-      - SPRING_DATASOURCE_PASSWORD=pismo_password
-      - SPRING_FLYWAY_URL=jdbc:postgresql://db:5432/pismo_transactions
-      - SPRING_FLYWAY_USER=pismo_user
-      - SPRING_FLYWAY_PASSWORD=pismo_password
+      - SPRING_DATASOURCE_URL=jdbc:postgresql://db:5432/${DB_NAME}
+      - SPRING_DATASOURCE_USERNAME=${DB_USERNAME}
+      - SPRING_DATASOURCE_PASSWORD=${DB_PASSWORD}
+      - SPRING_FLYWAY_URL=jdbc:postgresql://db:5432/${DB_NAME}
+      - SPRING_FLYWAY_USER=${DB_USERNAME}
+      - SPRING_FLYWAY_PASSWORD=${DB_PASSWORD}
+    networks:
+      - pismo-network
+
+networks:
+  pismo-network:
+    driver: bridge
