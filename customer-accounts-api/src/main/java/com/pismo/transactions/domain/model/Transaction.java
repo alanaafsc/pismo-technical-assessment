@@ -10,16 +10,14 @@ public class Transaction {
     private BigDecimal amount;
     private LocalDateTime eventDate;
 
+    public Transaction() {}
+
     public Transaction(Long accountId, Integer operationTypeId, BigDecimal amount) {
         this.accountId = accountId;
         this.operationTypeId = operationTypeId;
-        this.amount = formatAmountByOperation(operationTypeId, amount);
         this.eventDate = LocalDateTime.now();
-    }
-
-    private BigDecimal formatAmountByOperation(Integer typeId, BigDecimal value) {
-        if(value == null) return BigDecimal.ZERO;
-        return (typeId == 4) ? value.abs() : value.abs().negate();
+        OperationType type = OperationType.fromId(operationTypeId);
+        this.amount = type.isDebit() ? amount.abs().negate() : amount.abs();
     }
 
     public Long getTransactionId() {
@@ -40,5 +38,25 @@ public class Transaction {
 
     public LocalDateTime getEventDate() {
         return eventDate;
+    }
+
+    public void setTransactionId(Long transactionId) {
+        this.transactionId = transactionId;
+    }
+
+    public void setAccountId(Long accountId) {
+        this.accountId = accountId;
+    }
+
+    public void setOperationTypeId(Integer operationTypeId) {
+        this.operationTypeId = operationTypeId;
+    }
+
+    public void setAmount(BigDecimal amount) {
+        this.amount = amount;
+    }
+
+    public void setEventDate(LocalDateTime eventDate) {
+        this.eventDate = eventDate;
     }
 }

@@ -2,6 +2,7 @@ package com.pismo.transactions.infrastructure.adapters.out.persistence;
 
 import com.pismo.transactions.domain.model.Transaction;
 import com.pismo.transactions.domain.ports.TransactionRepositoryPort;
+import com.pismo.transactions.infrastructure.adapters.in.web.mapper.TransactionMapper;
 import com.pismo.transactions.infrastructure.adapters.out.persistence.entity.TransactionEntity;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Component;
@@ -10,17 +11,14 @@ import org.springframework.stereotype.Component;
 @RequiredArgsConstructor
 public class TransactionPersistenceAdapter implements TransactionRepositoryPort {
     private final SpringDataTransactionRepository repository;
+    private final TransactionMapper transactionMapper;
 
     @Override
     public Transaction save(Transaction transaction) {
-        TransactionEntity entity = new TransactionEntity();
-        entity.setAccountId(transaction.getAccountId());
-        entity.setOperationTypeId(transaction.getOperationTypeId());
-        entity.setAmount(transaction.getAmount());
-        entity.setEventDate(transaction.getEventDate());
+        TransactionEntity entity = transactionMapper.toEntity(transaction);
 
-        TransactionEntity saved = repository.save(entity);
+        TransactionEntity savedEntity = repository.save(entity);
 
-        return new Transaction(saved.getAccountId(), saved.getOperationTypeId(), saved.getAmount());
+        return transactionMapper.toDomain(savedEntity);
     }
 }

@@ -10,7 +10,7 @@ import java.math.BigDecimal;
 import java.time.LocalDateTime;
 
 @Entity
-@Table(name = "transactions")
+@Table(name = "Transactions")
 @Getter
 @Setter
 @NoArgsConstructor
@@ -19,18 +19,23 @@ public class TransactionEntity {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    @Column(name = "transaction_id")
+    @Column(name = "Transaction_ID")
     private Long transactionId;
 
-    @Column(name = "account_id", nullable = false)
+    @Column(name = "Account_ID", nullable = false)
     private Long accountId;
 
-    @Column(name = "operation_type_id", nullable = false)
+    @Column(name = "OperationType_ID", nullable = false)
     private Integer operationTypeId;
 
-    @Column(nullable = false)
+    @Column(name = "Amount", nullable = false)
     private BigDecimal amount;
 
-    @Column(name = "event_date", nullable = false)
+    /**
+     * Using explicit @Column mapping to ensure compatibility with the naming
+     * convention defined in the project specification (PDF), bypassing
+     * Hibernate's default snake_case translation to match the PostgreSQL schema.
+     */
+    @Column(name = "EventDate", nullable = false, columnDefinition = "TIMESTAMP(6)")
     private LocalDateTime eventDate;
 }
