@@ -16,8 +16,8 @@ The code is organized into three main layers to strictly follow the pattern:
 src/main/java/com/pismo/transactions/
 ├── domain/                         # 1. CORE DOMAIN (The Hexagon Center)
 │   ├── model/                      # Business entities (e.g., Account, Transaction)
-│   ├── enums/                      # Business rules logic (e.g., OperationType)
 │   ├── exceptions/                 # Custom business and domain exceptions
+│       ├── enums/                      # Business rules logic (e.g., OperationType)
 │   └── ports/                      # Boundaries (Interfaces for Inbound/Outbound)
 │
 ├── application/                    # 2. APPLICATION LAYER (Use Cases)
