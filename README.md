@@ -16,8 +16,8 @@ The code is organized into three main layers to strictly follow the pattern:
 src/main/java/com/pismo/transactions/
 ├── domain/                         # 1. CORE DOMAIN (The Hexagon Center)
 │   ├── model/                      # Business entities (e.g., Account, Transaction)
-│   ├── enums/                      # Business rules logic (e.g., OperationType)
 │   ├── exceptions/                 # Custom business and domain exceptions
+│       ├── enums/                      # Business rules logic (e.g., OperationType)
 │   └── ports/                      # Boundaries (Interfaces for Inbound/Outbound)
 │
 ├── application/                    # 2. APPLICATION LAYER (Use Cases)
@@ -27,13 +27,13 @@ src/main/java/com/pismo/transactions/
     ├── adapters/
     │   ├── in/web/                 # PRIMARY ADAPTERS (Driving)
     │   │   ├── docs/               # Swagger/OpenAPI interactive documentation
+    |   |   ├── controller/advice   # Intercepts exceptions to return standardized HTTP error contracts
     │   │   ├── dto/                # Request/Response Data Transfer Objects
-    │   │   └── mapper/             # Conversion: Domain ↔ DTO (MapStruct)
+    │   │   └── mapper/             # Conversion: Domain ↔ DTO & Domain ↔ Entity (MapStruct)
     │   │
-    │   └── out/persistence/        # SECONDARY ADAPTERS (Driven)
-    │       ├── entity/             # JPA Entities (Database mapping)
-    │       ├── repository/         # Spring Data JPA Interfaces
-    │       └── mapper/             # Conversion: Domain ↔ Entity
+    │   └── out/                    # SECONDARY ADAPTERS (Driven)
+    │       ├── persistence/        # Spring Data JPA Interfaces
+    |           ├── entity/         # JPA Entities (Database mapping)
     │
     └── configuration/              # FRAMEWORK CONFIGURATION
         └── bean/                   # Manual Bean registration (Inversion of Control)
