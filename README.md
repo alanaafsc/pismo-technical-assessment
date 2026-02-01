@@ -27,13 +27,13 @@ src/main/java/com/pismo/transactions/
     ├── adapters/
     │   ├── in/web/                 # PRIMARY ADAPTERS (Driving)
     │   │   ├── docs/               # Swagger/OpenAPI interactive documentation
+    |   |   ├── controller/advice   # Intercepts exceptions to return standardized HTTP error contracts
     │   │   ├── dto/                # Request/Response Data Transfer Objects
-    │   │   └── mapper/             # Conversion: Domain ↔ DTO (MapStruct)
+    │   │   └── mapper/             # Conversion: Domain ↔ DTO & Domain ↔ Entity (MapStruct)
     │   │
-    │   └── out/persistence/        # SECONDARY ADAPTERS (Driven)
-    │       ├── entity/             # JPA Entities (Database mapping)
-    │       ├── repository/         # Spring Data JPA Interfaces
-    │       └── mapper/             # Conversion: Domain ↔ Entity
+    │   └── out                     # SECONDARY ADAPTERS (Driven)
+    │       ├── persistence/        # Spring Data JPA Interfaces
+    |           ├── entity/         # JPA Entities (Database mapping)
     │
     └── configuration/              # FRAMEWORK CONFIGURATION
         └── bean/                   # Manual Bean registration (Inversion of Control)
