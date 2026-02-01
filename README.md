@@ -31,7 +31,7 @@ src/main/java/com/pismo/transactions/
     │   │   ├── dto/                # Request/Response Data Transfer Objects
     │   │   └── mapper/             # Conversion: Domain ↔ DTO & Domain ↔ Entity (MapStruct)
     │   │
-    │   └── out                     # SECONDARY ADAPTERS (Driven)
+    │   └── out/                    # SECONDARY ADAPTERS (Driven)
     │       ├── persistence/        # Spring Data JPA Interfaces
     |           ├── entity/         # JPA Entities (Database mapping)
     │
