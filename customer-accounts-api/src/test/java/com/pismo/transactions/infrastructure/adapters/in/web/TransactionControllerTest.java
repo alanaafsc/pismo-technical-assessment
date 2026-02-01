@@ -35,12 +35,12 @@ class TransactionControllerTest {
     @Test
     @DisplayName("Should return 201 Created and the transaction details when request is valid")
     void shouldReturn201ForValidTransaction() throws Exception {
-        // Arrange
+        Long transactionId = 1L;
         Long accountId = 1L;
         Integer opTypeId = 1;
         BigDecimal amount = new BigDecimal("100.50");
 
-        Transaction mockDomain = new Transaction(accountId, opTypeId, amount);
+        Transaction mockDomain = new Transaction(transactionId, accountId, opTypeId, amount);
 
         TransactionResponseDTO mockResponse = new TransactionResponseDTO(
                 100L,

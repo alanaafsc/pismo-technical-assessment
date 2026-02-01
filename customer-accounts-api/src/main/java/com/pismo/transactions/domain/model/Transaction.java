@@ -10,9 +10,9 @@ public class Transaction {
     private BigDecimal amount;
     private LocalDateTime eventDate;
 
-    public Transaction() {}
-
-    public Transaction(Long accountId, Integer operationTypeId, BigDecimal amount) {
+    public Transaction(Long transactionId, Long accountId, Integer operationTypeId,
+                       BigDecimal amount) {
+        this.transactionId = transactionId;
         this.accountId = accountId;
         this.operationTypeId = operationTypeId;
         this.eventDate = LocalDateTime.now();
@@ -40,23 +40,4 @@ public class Transaction {
         return eventDate;
     }
 
-    public void setTransactionId(Long transactionId) {
-        this.transactionId = transactionId;
-    }
-
-    public void setAccountId(Long accountId) {
-        this.accountId = accountId;
-    }
-
-    public void setOperationTypeId(Integer operationTypeId) {
-        this.operationTypeId = operationTypeId;
-    }
-
-    public void setAmount(BigDecimal amount) {
-        this.amount = amount;
-    }
-
-    public void setEventDate(LocalDateTime eventDate) {
-        this.eventDate = eventDate;
-    }
 }

@@ -34,7 +34,7 @@ class TransactionMapperTest {
     @Test
     @DisplayName("Should map Domain to Entity correctly")
     void shouldMapDomainToEntity() {
-        Transaction domain = new Transaction(1L, 1, new BigDecimal("100.00"));
+        Transaction domain = new Transaction(1L, 1L, 1, new BigDecimal("100.00"));
 
         TransactionEntity entity = mapper.toEntity(domain);
 

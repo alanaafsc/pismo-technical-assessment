@@ -14,7 +14,7 @@ class TransactionTest {
     void shouldInvertSignalForPurchase() {
         BigDecimal amount = new BigDecimal("100.00");
 
-        Transaction transaction = new Transaction(1L, 1, amount);
+        Transaction transaction = new Transaction(1L, 1L, 1, amount);
 
         assertEquals(new BigDecimal("-100.00"), transaction.getAmount());
     }
@@ -24,7 +24,7 @@ class TransactionTest {
     void shouldKeepPositiveForPayment() {
         BigDecimal amount = new BigDecimal("100.00");
 
-        Transaction transaction = new Transaction(1L, 4, amount);
+        Transaction transaction = new Transaction(1L, 1L, 4, amount);
 
         assertEquals(new BigDecimal("100.00"), transaction.getAmount());
     }

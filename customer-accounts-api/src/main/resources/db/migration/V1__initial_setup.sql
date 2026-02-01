@@ -1,6 +1,6 @@
 -- Creation of the Accounts table
 CREATE TABLE Accounts (
-    Account_ID SERIAL PRIMARY KEY,
+    Account_ID BIGSERIAL PRIMARY KEY,
     Document_Number VARCHAR(20) UNIQUE NOT NULL
 );
 
@@ -12,9 +12,9 @@ CREATE TABLE Operation_Types (
 
 -- Creation of the Transactions table
 CREATE TABLE Transactions (
-    Transaction_ID SERIAL PRIMARY KEY,
-    Account_ID INTEGER NOT NULL REFERENCES Accounts(Account_ID),
-    OperationType_ID INTEGER NOT NULL REFERENCES Operation_Types(OperationType_ID),
+    Transaction_ID BIGSERIAL PRIMARY KEY,
+    Account_ID BIGINT NOT NULL REFERENCES Accounts(Account_ID),
+    OperationType_ID BIGINT NOT NULL REFERENCES Operation_Types(OperationType_ID),
     Amount DECIMAL(10, 2) NOT NULL,
     EventDate TIMESTAMP NOT NULL DEFAULT CURRENT_TIMESTAMP
 );

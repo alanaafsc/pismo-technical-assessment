@@ -18,7 +18,7 @@ public class ProcessTransactionUseCase {
         accountRepository.findById(accountId)
                 .orElseThrow(AccountNotFoundException::new);
 
-        Transaction transaction = new Transaction(accountId, operationTypeId, amount);
+        Transaction transaction = new Transaction(null, accountId, operationTypeId, amount);
 
         return transactionRepository.save(transaction);
     }

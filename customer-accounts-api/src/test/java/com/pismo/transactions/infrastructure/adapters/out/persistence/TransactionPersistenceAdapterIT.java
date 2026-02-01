@@ -46,7 +46,7 @@ class TransactionPersistenceAdapterIT {
 
     @Test
     void shouldSaveThroughAdapter() {
-        Transaction domainInput = new Transaction(123L, 1, new BigDecimal("100.00"));
+        Transaction domainInput = new Transaction(1L, 123L, 1, new BigDecimal("100.00"));
 
         TransactionEntity entityToSave = new TransactionEntity();
         entityToSave.setAccountId(123L);
@@ -54,8 +54,7 @@ class TransactionPersistenceAdapterIT {
         entityToSave.setOperationTypeId(1);
         entityToSave.setEventDate(LocalDateTime.now());
 
-        Transaction domainOutput = new Transaction(123L, 1, new BigDecimal("-100.00"));
-        domainOutput.setTransactionId(1L);
+        Transaction domainOutput = new Transaction(1L, 123L, 1, new BigDecimal("-100.00"));
 
         when(mapper.toEntity(any(Transaction.class))).thenReturn(entityToSave);
         when(mapper.toDomain(any(TransactionEntity.class))).thenReturn(domainOutput);
