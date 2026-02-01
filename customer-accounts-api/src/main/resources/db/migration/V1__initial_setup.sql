@@ -14,7 +14,7 @@ CREATE TABLE Operation_Types (
 CREATE TABLE Transactions (
     Transaction_ID BIGSERIAL PRIMARY KEY,
     Account_ID BIGINT NOT NULL REFERENCES Accounts(Account_ID),
-    OperationType_ID BIGINT NOT NULL REFERENCES Operation_Types(OperationType_ID),
+    OperationType_ID INT NOT NULL REFERENCES Operation_Types(OperationType_ID),
     Amount DECIMAL(10, 2) NOT NULL,
     EventDate TIMESTAMP NOT NULL DEFAULT CURRENT_TIMESTAMP
 );
