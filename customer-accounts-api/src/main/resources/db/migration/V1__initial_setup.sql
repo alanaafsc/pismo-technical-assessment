@@ -1,7 +1,8 @@
 -- Creation of the Accounts table
 CREATE TABLE Accounts (
     Account_ID BIGSERIAL PRIMARY KEY,
-    Document_Number VARCHAR(20) UNIQUE NOT NULL
+    Document_Number VARCHAR(20) UNIQUE NOT NULL,
+    Available_Credit_Limit DECIMAL(10,2) NOT NULL
 );
 
 -- Creation of the Operation Types table

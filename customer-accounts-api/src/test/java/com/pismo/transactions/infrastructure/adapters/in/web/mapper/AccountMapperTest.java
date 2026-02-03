@@ -6,6 +6,8 @@ import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 import org.mapstruct.factory.Mappers;
 
+import java.math.BigDecimal;
+
 import static org.junit.jupiter.api.Assertions.*;
 
 class AccountMapperTest {
@@ -17,7 +19,7 @@ class AccountMapperTest {
     void shouldMapDomainToDto() {
         Long accountId = 1L;
         String documentNumber = "12345678900";
-        Account domain = new Account(accountId, documentNumber);
+        Account domain = new Account(1L, documentNumber, new BigDecimal("500"));
 
         AccountResponseDTO dto = mapper.toDTO(domain);
 

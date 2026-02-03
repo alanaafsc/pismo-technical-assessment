@@ -10,6 +10,8 @@ import org.mockito.InjectMocks;
 import org.mockito.Mock;
 import org.mockito.junit.jupiter.MockitoExtension;
 
+import java.math.BigDecimal;
+
 import static org.junit.jupiter.api.Assertions.*;
 import static org.mockito.ArgumentMatchers.any;
 import static org.mockito.Mockito.*;
@@ -28,7 +30,8 @@ class CreateAccountUseCaseTest {
     void shouldCreateAccountSuccess() {
         String doc = "12345678900";
         when(accountRepository.existsByDocumentNumber(doc)).thenReturn(false);
-        when(accountRepository.save(any(Account.class))).thenReturn(new Account(1L, doc));
+        Account account = new Account(1L, doc, new BigDecimal("500"));
+        when(accountRepository.save(any(Account.class))).thenReturn(account);
 
         Account result = useCase.execute(doc);
 

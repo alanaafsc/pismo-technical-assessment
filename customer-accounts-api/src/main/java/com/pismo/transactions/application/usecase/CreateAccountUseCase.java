@@ -13,6 +13,6 @@ public class CreateAccountUseCase {
         if(accountRepository.existsByDocumentNumber(documentNumber)) {
             throw new AccountAlreadyExistsException();
         }
-        return accountRepository.save(new Account(null, documentNumber));
+        return accountRepository.save(new Account(documentNumber));
     }
 }

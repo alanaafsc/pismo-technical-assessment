@@ -37,8 +37,9 @@ class ProcessTransactionUseCaseTest {
         Long accountId = 1L;
         Integer operationTypeId = 4;
         BigDecimal amount = new BigDecimal("100.0");
+        Account account = new Account("12345678900");
 
-        when(accountRepository.findById(accountId)).thenReturn(Optional.of(mock(Account.class)));
+        when(accountRepository.findById(accountId)).thenReturn(Optional.of(account));
 
         when(transactionRepository.save(any(Transaction.class))).thenAnswer(invocation -> invocation.getArgument(0));
 

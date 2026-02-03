@@ -1,10 +1,13 @@
 package com.pismo.transactions.infrastructure.adapters.out.persistence.entity;
 
 import jakarta.persistence.*;
+import jakarta.validation.constraints.Positive;
 import lombok.AllArgsConstructor;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
+
+import java.math.BigDecimal;
 
 @Entity
 @Table(name = "Accounts")
@@ -21,4 +24,8 @@ public class AccountEntity {
 
     @Column(name = "Document_Number", unique = true, nullable = false)
     private String documentNumber;
+
+    @Column(name = "Available_Credit_Limit")
+    @Positive(message = "Price must be strictly positive")
+    private BigDecimal availableCreditLimit;
 }

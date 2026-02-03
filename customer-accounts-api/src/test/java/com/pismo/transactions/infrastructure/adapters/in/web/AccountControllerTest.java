@@ -13,6 +13,7 @@ import org.springframework.http.MediaType;
 import org.springframework.test.context.bean.override.mockito.MockitoBean;
 import org.springframework.test.web.servlet.MockMvc;
 
+import java.math.BigDecimal;
 import java.util.Optional;
 
 import static org.mockito.ArgumentMatchers.any;
@@ -40,8 +41,8 @@ class AccountControllerTest {
     @Test
     @DisplayName("POST /accounts - Should return 201 Created")
     void shouldReturn201OnCreate() throws Exception {
-        Account mockAccount = new Account(1L, "12345");
-        AccountResponseDTO mockResponse = new AccountResponseDTO(1L, "12345");
+        Account mockAccount = new Account("12345");
+        AccountResponseDTO mockResponse = new AccountResponseDTO(1L, "12345", new BigDecimal("5000"));
 
         when(createAccountUseCase.execute(any())).thenReturn(mockAccount);
         when(accountMapper.toDTO(any())).thenReturn(mockResponse);
@@ -57,8 +58,8 @@ class AccountControllerTest {
     @Test
     @DisplayName("GET /accounts/{id} - Should return 200 OK")
     void shouldReturn200OnGetById() throws Exception {
-        Account mockAccount = new Account(1L, "12345");
-        AccountResponseDTO mockResponse = new AccountResponseDTO(1L, "12345");
+        Account mockAccount = new Account("12345");
+        AccountResponseDTO mockResponse = new AccountResponseDTO(1L, "12345", new BigDecimal("5000"));
 
         when(accountRepository.findById(1L)).thenReturn(Optional.of(mockAccount));
         when(accountMapper.toDTO(any())).thenReturn(mockResponse);
